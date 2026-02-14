@@ -26,7 +26,8 @@ pipeline {
          stage('Build image') {
             steps {
                 script {
-                    docker.build("devops-training-java-app:${version}", "--build-arg VERSION=1 -f devops/Dockerfile .")
+                    def version = readFile('VERSION').trim()
+                    docker.build("devops-training-java-app:${version}", "--build-arg VERSION=${version} -f devops/Dockerfile .")
                 }
             }
         }
