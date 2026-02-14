@@ -11,6 +11,23 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-}
+        }
+         stage('Lint') {
+            agent {
+                docker {
+                    image 'maven:3.8.6-openjdk-11-slim'
+                }
+            }
+            steps {
+                sh 'make lint'
+            }
+        }
+         stage('Build image') {
+            steps {
+                script {
+                    docker.build("devops-training-java-app:${version}", "--build-arg VERSION=1 -f devops/Dockerfile .")
+                }
+            }
+        }
     }
 }
