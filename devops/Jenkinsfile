@@ -27,6 +27,7 @@ pipeline {
             steps {
                 script {
                     def version = readFile('VERSION').trim()
+                    echo "Building image: devops-training-java-app:${version}"
                     docker.build("devops-training-java-app:${version}", "--build-arg VERSION=${version} -f devops/Dockerfile .")
                 }
             }
