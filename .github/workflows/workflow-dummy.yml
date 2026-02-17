@@ -5,13 +5,13 @@
 
 name: CI (dummy)
 
-on:
+on: ## Event triggers (on:): cuándo se ejecuta (push, PR, manual, schedule, etc.).
   workflow_dispatch:
 
-jobs:
+jobs: ##Jobs: unidades de ejecución paralelizables (jobs.<job_id>).
   dummy:
     runs-on: ubuntu-latest
-    steps:
+    steps: ## Steps: comandos o acciones dentro de un job.
       - name: Mostrar contexto
         run: |
           echo "Repo: $GITHUB_REPOSITORY"
